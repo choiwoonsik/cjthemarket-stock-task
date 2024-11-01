@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url:
+    driver-class-name:
+    username: stock
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_schema: stock_test
+  flyway:
+    enabled: false
