@@ -6,7 +6,7 @@ spring:
     name: stock
   datasource:
     url: jdbc:mysql://localhost:3306/stock?serverTimezone=UTC&characterEncoding=UTF-8
-    driver-class-name:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: stock_admin
     password: stock
   jpa:

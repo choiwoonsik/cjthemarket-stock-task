@@ -3,15 +3,23 @@ spring:
     activate:
       on-profile: test
   datasource:
-    url:
-    driver-class-name:
-    username: stock
-    password:
+    url: jdbc:mysql://localhost:3306/stock_test?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: stock_admin
+    password: stock
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     properties:
       hibernate:
         default_schema: stock_test
   flyway:
-    enabled: false
+    baseline-on-migrate: true
+    baseline-version: 1
+    user: stock_admin
+    password: stock
+    enabled: true
+    url: jdbc:mysql://localhost:3306/stock_test?serverTimezone=UTC&characterEncoding=UTF-8
+    locations: classpath:db/migration
+    schemas: stock_test
+    clean-disabled: false

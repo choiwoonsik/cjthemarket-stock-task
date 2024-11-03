@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class ExceptionHandler {
     @ExceptionHandler(Exception::class)
     fun handleException(e: Exception): CommonResult {
-        return getFailResult("[미정의 에러]: ${e.message}")
+        return getFailResult("[미정의 에러]: 원인: ${e.cause}, 내용: ${e.message}\n${e.printStackTrace()}")
     }
 
     @ExceptionHandler(CustomClientException::class)

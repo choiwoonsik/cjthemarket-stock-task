@@ -1,5 +1,6 @@
 package com.cjthemarket.stock_management.stock.repository
 
+import com.cjthemarket.stock_management.stock.model.QStock.Companion.stock
 import com.cjthemarket.stock_management.stock.model.Stock
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
@@ -15,5 +16,11 @@ class StockRepository(
     @PersistenceContext
     override fun setEntityManager(entityManager: EntityManager) {
         super.setEntityManager(entityManager)
+    }
+
+    fun findStockByProductId(productId: Long): Stock? {
+        return from(stock)
+            .where(stock.productId.eq(productId))
+            .fetchOne()
     }
 }

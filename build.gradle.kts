@@ -111,6 +111,26 @@ flyway {
 	locations = listOf("filesystem:src/main/resources/db/migration", "filesystem:src/main/resources/db/seed").toTypedArray()
 }
 
+task<org.flywaydb.gradle.task.FlywayMigrateTask>("flywayMigrateTestDB") {
+	url = "jdbc:mysql://localhost:3306/stock_test?serverTimezone=UTC&characterEncoding=UTF-8"
+	user = "stock_admin"
+	password = "stock"
+	baselineVersion = "1"
+	baselineOnMigrate = true
+	schemas = listOf("stock_test").toTypedArray()
+	locations = listOf("filesystem:src/main/resources/db/migration").toTypedArray()
+}
+
+task<org.flywaydb.gradle.task.FlywayCleanTask>("flywayCleanTestDB") {
+	url = "jdbc:mysql://localhost:3306/stock_test?serverTimezone=UTC&characterEncoding=UTF-8"
+	user = "stock_admin"
+	password = "stock"
+	baselineVersion = "1"
+	baselineOnMigrate = true
+	schemas = listOf("stock_test").toTypedArray()
+	locations = listOf("filesystem:src/main/resources/db/migration").toTypedArray()
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }

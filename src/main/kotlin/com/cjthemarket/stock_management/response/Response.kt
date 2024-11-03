@@ -5,12 +5,12 @@ open class CommonResult {
     var message: String = "성공"
 }
 
-data class SingleResult<T>(
+data class Result<T>(
     var data: T,
 ) : CommonResult()
 
-fun <T> getSingleResult(data: T, message: String? = null): SingleResult<T> {
-    return SingleResult(data)
+fun <T> getResult(data: T, message: String? = null): Result<T> {
+    return Result(data)
         .also {
             it.success = SUCCESS
             it.message = message ?: "성공"
