@@ -28,7 +28,7 @@ class StockMutationController(
     fun decreaseStock(
         @RequestBody input: ProductStockDecreaseInput,
     ): CommonResult {
-        val stockResponse: StockResponse = stockMutator.decreaseStock(input).toResponse()
+        val stockResponse: StockResponse = stockMutator.decreaseStockWithLock(input).toResponse()
 
         return getResult(stockResponse)
     }

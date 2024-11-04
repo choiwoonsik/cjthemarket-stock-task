@@ -1,5 +1,6 @@
 package com.cjthemarket.stock_management.stock.service
 
+import com.cjthemarket.stock_management.distributedlock.DistributedLockService
 import com.cjthemarket.stock_management.response.InvalidRequestException
 import com.cjthemarket.stock_management.stock.dto.ProductStockDecreaseInput
 import com.cjthemarket.stock_management.stock.dto.ProductStockSetInput
@@ -15,7 +16,8 @@ import org.springframework.orm.jpa.JpaSystemException
 class StockMutatorTest {
     private val stockMutationService: StockMutationService = mockk(relaxed = true)
     private val stockValidateService: StockValidateService = mockk(relaxed = true)
-    private val sut = StockMutator(stockValidateService, stockMutationService)
+    private val distributedLockService: DistributedLockService = mockk(relaxed = true)
+    private val sut = StockMutator(stockValidateService, stockMutationService, distributedLockService)
 
     @Test
     fun `decreaseStock - 재고 감소 요청을 받아서 validation 후 요청을 수행하고 StockDto를 반환한다`() {
@@ -26,10 +28,10 @@ class StockMutatorTest {
         val decreaseInput = ProductStockDecreaseInput(3L, 2L)
 
         every { stockValidateService.validate(decreaseInput) } returns Unit
-        every { stockMutationService.decreaseStock(decreaseInput) } returns stockDto
+        every { distributedLockService.lock(any(), any(), any(), any<() -> StockDto>()) } returns stockDto
 
         // when
-        val decreaseStock = sut.decreaseStock(decreaseInput)
+        val decreaseStock = sut.decreaseStockWithLock(decreaseInput)
 
         // then
         decreaseStock.id shouldBe stockDto.id
