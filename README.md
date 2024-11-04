@@ -125,7 +125,7 @@ CREATE TABLE stocks
 
 **파라미터**
 
-```json
+```text
 ?id=111
 ```
 
@@ -151,8 +151,8 @@ CREATE TABLE stocks
 
 **파라미터**
 
-```json
-product_id=1
+```text
+?product_id=1
 ```
 
 **응답**
