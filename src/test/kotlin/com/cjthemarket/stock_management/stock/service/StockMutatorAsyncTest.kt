@@ -139,9 +139,9 @@ class StockMutatorAsyncTest(
 
     private fun getThreadTaskExecutor(): ThreadPoolTaskExecutor {
         val executor = ThreadPoolTaskExecutor()
-        executor.corePoolSize = 1000
-        executor.maxPoolSize = 1000
-        executor.queueCapacity = 10000
+        executor.corePoolSize = 10
+        executor.maxPoolSize = 20
+        executor.queueCapacity = 1000
         executor.setThreadNamePrefix("multi thread -")
         executor.initialize()
 
