@@ -117,16 +117,53 @@ CREATE TABLE stocks
 - [API Swagger 문서](http://localhost:8080/swagger-ui.html)
 - [노션 정리 문서](https://woonsik.notion.site/API-130efd1222118037bce4fadb72f129cb?pvs=74)
 
-### 상품 조회
+### 상품 전체 조회
 
 **URL**
 
-- `GET api/v1/product`
+- `GET /api/v1/product/all`
+
+**응답**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "비비고 만두",
+      "original_price": 4900
+    },
+    {
+      "id": 2,
+      "name": "비비고 김치",
+      "original_price": 5900
+    },
+    {
+      "id": 3,
+      "name": "비비고 떡볶이",
+      "original_price": 3900
+    },
+    {
+      "id": 4,
+      "name": "비비고 라면",
+      "original_price": 2900
+    }
+  ],
+  "success": true,
+  "message": "성공"
+}
+```
+
+
+### 상품 단건 조회
+
+**URL**
+
+- `GET /api/v1/product`
 
 **파라미터**
 
 ```text
-?id=111
+?id=1
 ```
 
 **응답**
@@ -147,7 +184,7 @@ CREATE TABLE stocks
 
 **URL**
 
-- `GET api/v1/stock`
+- `GET /api/v1/stock`
 
 **파라미터**
 
@@ -173,7 +210,7 @@ CREATE TABLE stocks
 
 **URL**
 
-- `PUT api/v1/stock/decrease`
+- `PUT /api/v1/stock/decrease`
 
 **BODY**
 
@@ -202,7 +239,7 @@ CREATE TABLE stocks
 
 **URL**
 
-- `PUT api/v1/stock/set`
+- `PUT /api/v1/stock/set`
 
 **BODY**
 
